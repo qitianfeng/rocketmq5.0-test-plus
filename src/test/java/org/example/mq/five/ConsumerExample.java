@@ -1,4 +1,4 @@
-package org.example.mq;
+package org.example.mq.five;
 
 import org.apache.rocketmq.client.apis.ClientConfiguration;
 import org.apache.rocketmq.client.apis.ClientException;
@@ -27,7 +27,7 @@ public class ConsumerExample {
         String tag = "*";
         FilterExpression filterExpression = new FilterExpression(tag, FilterExpressionType.TAG);
         // 为消费者指定所属的消费者分组，Group需要提前创建。
-        String consumerGroup = "YourConsumerGroup";
+        String consumerGroup = "TestDelatConsumeGroup";
         // 指定需要订阅哪个目标Topic，Topic需要提前创建。
         String topic = "TestTopic";
         // 初始化PushConsumer，需要绑定消费者分组ConsumerGroup、通信参数以及订阅关系。
