@@ -50,7 +50,7 @@ public class ProducerExample {
     }
 
     @Test
-    public void testDelayProduce() throws ClientException {
+    public void testDelayProducer() throws ClientException {
         // 接入点地址，需要设置成Proxy的地址和端口列表，一般是xxx:8081;xxx:8081。
         String endpoint = "10.1.4.71:8081";
         // 消息发送的目标Topic名称，需要提前创建。
@@ -64,7 +64,7 @@ public class ProducerExample {
                 .setClientConfiguration(configuration)
                 .build();
         //以下示例表示：延迟时间为10分钟之后的Unix时间戳。
-        Long deliverTimeStamp = System.currentTimeMillis() + 1L * 60 * 1000;
+        Long deliverTimeStamp = System.currentTimeMillis() + 1L * 3 * 1000;
         // 普通消息发送。
         Message message = provider.newMessageBuilder()
                 .setTopic(topic)
@@ -75,9 +75,8 @@ public class ProducerExample {
                 // 消息体。
                 .setBody("messageBody".getBytes())
                 .setDeliveryTimestamp(deliverTimeStamp)
-                .addProperty("messageType","DELAY")
                 .build();
-
+        System.out.println(deliverTimeStamp);
         try {
             // 发送消息，需要关注发送结果，并捕获失败等异常。
             SendReceipt sendReceipt = producer.send(message);
